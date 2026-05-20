@@ -96,19 +96,44 @@ OpenAI 文章里最有工程价值的部分，是他们没有停留在“WebRTC 
 OpenAI 最终采用的架构是把媒体数据包路由和 WebRTC 协议终止拆开。
 
 ```mermaid
-flowchart LR
-  Client["Client\nBrowser / Mobile / Device"] -->|"Standard WebRTC\nSTUN / DTLS / SRTP"| RelayVIP["Relay VIP\nsmall public UDP surface"]
+flowchart TB
+  subgraph Public["Public WebRTC Entry"]
+    direction TB
+    Client["Client\nBrowser / Mobile / Device"]
+    RelayVIP["Relay VIP\nSmall public UDP surface"]
+  end
 
-  RelayVIP --> Relay["Relay\nstateless UDP forwarding"]
-  Relay -->|"route by ICE ufrag metadata"| Transceiver["Transceiver\nstateful WebRTC endpoint"]
+  subgraph Routing["Packet Routing Layer"]
+    direction TB
+    Relay["Relay\nStateless UDP forwarding"]
+    RouteKey["ICE ufrag\nRoute metadata"]
+  end
 
-  Transceiver -->|"internal realtime protocol"| Orchestrator["Realtime Orchestrator"]
-  Orchestrator --> Model["Model Runtime"]
-  Orchestrator --> ASR["ASR"]
-  Orchestrator --> TTS["TTS"]
-  Orchestrator --> Tools["Tools / Function Calling"]
+  subgraph WebRTC["WebRTC Termination"]
+    direction TB
+    Transceiver["Transceiver\nStateful WebRTC endpoint"]
+    State["Session State\nICE / DTLS / SRTP"]
+  end
 
-  Transceiver -->|"owns ICE / DTLS / SRTP / session state"| State["Session State"]
+  subgraph AI["Realtime AI Runtime"]
+    direction TB
+    Orchestrator["Realtime Orchestrator"]
+    Model["Model Runtime"]
+    ASR["ASR"]
+    TTS["TTS"]
+    Tools["Tools / Function Calling"]
+  end
+
+  Client -->|"Standard WebRTC\nSTUN / DTLS / SRTP"| RelayVIP
+  RelayVIP --> Relay
+  Relay --> RouteKey
+  RouteKey --> Transceiver
+  Transceiver --> State
+  Transceiver -->|"Internal realtime protocol"| Orchestrator
+  Orchestrator --> Model
+  Orchestrator --> ASR
+  Orchestrator --> TTS
+  Orchestrator --> Tools
 ```
 
 其中，`relay` 是轻量 UDP 转发层。它不解密媒体，不跑完整 ICE/DTLS 状态机，也不参与编解码协商。它只读取足够的包元数据，然后把包转发给正确的 transceiver。
@@ -196,12 +221,14 @@ ASR + LLM + TTS 组合链路
 ```mermaid
 flowchart TB
   subgraph Access["Access Protocols"]
+    direction TB
     WebRTC["WebRTC"]
     WS["WebSocket"]
     SIP["SIP / Phone"]
   end
 
   subgraph Gateway["Realtime Voice AI Gateway"]
+    direction TB
     Session["Realtime Session"]
     EventProtocol["Unified Event Protocol"]
     Audio["Audio Stream\nPCM / Opus / VAD / Commit"]
@@ -212,6 +239,7 @@ flowchart TB
   end
 
   subgraph Providers["Providers"]
+    direction TB
     OpenAI["OpenAI Realtime"]
     Gemini["Gemini Live"]
     Doubao["Doubao Realtime Voice"]
