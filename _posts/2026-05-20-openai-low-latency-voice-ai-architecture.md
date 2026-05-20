@@ -1,6 +1,6 @@
 ---
 title: OpenAI低延迟语音AI架构拆解：为什么实时AI不只是一个SFU问题
-date: 2026-05-20 20:00:00 +0800
+date: 2026-05-20 11:00:00 +0800
 categories: [音视频, RTC, AI]
 tags: [WebRTC, OpenAI, Realtime API, SFU, RTC, AI语音, 低延迟, 架构]
 mermaid: true
