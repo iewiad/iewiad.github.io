@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">戴伟 technical avatar</title>
+  <desc id="desc">A technical style avatar with circuit traces, realtime audio waves, and DW initials.</desc>
+  <defs>
+    <radialGradient id="bg" cx="32%" cy="24%" r="78%">
+      <stop offset="0%" stop-color="#1b4f72"/>
+      <stop offset="48%" stop-color="#102a43"/>
+      <stop offset="100%" stop-color="#07111f"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="64" y1="88" x2="448" y2="424">
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="55%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="104" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="192" fill="none" stroke="#1e3a5f" stroke-width="2"/>
+  <circle cx="256" cy="256" r="154" fill="none" stroke="#164e63" stroke-width="2" opacity=".7"/>
+
+  <g fill="none" stroke="url(#cyan)" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <path d="M88 174h70l38-38h70" stroke-width="7"/>
+    <path d="M424 184h-74l-34-34h-54" stroke-width="7"/>
+    <path d="M92 338h82l34 36h76" stroke-width="7"/>
+    <path d="M420 330h-78l-42 42h-56" stroke-width="7"/>
+    <path d="M132 260h52l26-26h92l26 26h52" stroke-width="6" opacity=".85"/>
+  </g>
+
+  <g fill="#67e8f9">
+    <circle cx="88" cy="174" r="10"/>
+    <circle cx="266" cy="136" r="10"/>
+    <circle cx="424" cy="184" r="10"/>
+    <circle cx="92" cy="338" r="10"/>
+    <circle cx="420" cy="330" r="10"/>
+    <circle cx="244" cy="372" r="10"/>
+  </g>
+
+  <g fill="none" stroke="#a7f3d0" stroke-linecap="round" opacity=".92">
+    <path d="M150 292c18-42 35-42 52 0s34 42 52 0 35-42 52 0 35 42 56 0" stroke-width="8"/>
+    <path d="M152 318c18-26 35-26 52 0s34 26 52 0 35-26 52 0 35 26 56 0" stroke-width="5" opacity=".58"/>
+  </g>
+
+  <g>
+    <circle cx="256" cy="230" r="102" fill="#0f172a" opacity=".72"/>
+    <circle cx="256" cy="230" r="100" fill="none" stroke="url(#cyan)" stroke-width="5"/>
+    <text x="256" y="250"
+          text-anchor="middle"
+          font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="88"
+          font-weight="800"
+          letter-spacing="0"
+          fill="#e0f2fe">DW</text>
+    <text x="256" y="296"
+          text-anchor="middle"
+          font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+          font-size="22"
+          font-weight="600"
+          letter-spacing="0"
+          fill="#86efac">RTC · AI · MEDIA</text>
+  </g>
+</svg>
