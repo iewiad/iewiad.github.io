@@ -15,7 +15,7 @@ order: 4
 ## 联系方式
 
 - 邮箱：hostgfs@gmail.com / hostmx@163.com
-- GitHub：[hostgfs](https://github.com/hostgfs)
+- GitHub：[iewiad](https://github.com/iewiad)
 
 ## 关于本站
 
